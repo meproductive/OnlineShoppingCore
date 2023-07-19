@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShoppingCore", "OnlineShoppingCore\OnlineShoppingCore.csproj", "{C379EC75-5F94-43C7-BC86-68AD2789DE0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShoppingCore", "OnlineShoppingCore\OnlineShoppingCore.csproj", "{C379EC75-5F94-43C7-BC86-68AD2789DE0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShoppingCoreBLL", "OnlineShoppingCoreBLL\OnlineShoppingCoreBLL.csproj", "{F3C985FB-6387-44C7-A415-575FBAB5243B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShoppingCoreBLL", "OnlineShoppingCoreBLL\OnlineShoppingCoreBLL.csproj", "{F3C985FB-6387-44C7-A415-575FBAB5243B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShoppingCoreDAL", "OnlineShoppingCoreDAL\OnlineShoppingCoreDAL.csproj", "{ACBEF13A-F970-4291-AD70-BF38A61F9684}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShoppingCoreDAL", "OnlineShoppingCoreDAL\OnlineShoppingCoreDAL.csproj", "{ACBEF13A-F970-4291-AD70-BF38A61F9684}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShoppingCoreEntity", "OnlineShoppingCoreEntity\OnlineShoppingCoreEntity.csproj", "{AA25D451-9BF2-489A-8375-EE50795F264A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShoppingCoreEntity", "OnlineShoppingCoreEntity\OnlineShoppingCoreEntity.csproj", "{AA25D451-9BF2-489A-8375-EE50795F264A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShoppingCoreEntity
 {
-    internal class OrderItem
+    public class OrderItem
     {
     }
 }

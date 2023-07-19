@@ -7,9 +7,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingCoreDAL.Concrete.EFCore
+namespace OnlineShoppingCoreDAL.Concrete.MySQL
 {
-    internal class EFCoreProductDAL : IProductDAL
+    internal class MySQLProductDAL : IProductDAL
     {
         public void Create(Product entity)
         {
@@ -27,11 +27,6 @@ namespace OnlineShoppingCoreDAL.Concrete.EFCore
         }
 
         public Product GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Product GetOne(Expression<Func<Task, bool>> filter)
         {
             throw new NotImplementedException();
         }
