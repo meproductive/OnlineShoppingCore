@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\OnlineShoppingCoreDAL\OnlineShoppingCoreDAL.csproj" />
+		<ProjectReference Include="..\OnlineShoppingCoreEntity\OnlineShoppingCoreEntity.csproj" />
 	</ItemGroup>
 
 </Project>

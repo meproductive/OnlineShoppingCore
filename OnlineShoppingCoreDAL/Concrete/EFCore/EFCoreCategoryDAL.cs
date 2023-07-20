@@ -9,11 +9,8 @@ using System.Threading.Tasks;
 
 namespace OnlineShoppingCoreDAL.Concrete.EFCore
 {
-    public class EFCoreProductDAL : EFCoreGenericRepository<Product, ShopContext>, IProductDAL
+    public class EFCoreCategoryDAL : EFCoreGenericRepository<Category, ShopContext>, ICategoryDAL
     {
-        public IEnumerable<Product> GetPopularProducts()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
