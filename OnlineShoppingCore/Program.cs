@@ -1,7 +1,20 @@
+
+using OnlineShoppingCoreBLL.Abstract;
+using OnlineShoppingCoreBLL.Concrete;
+using OnlineShoppingCoreDAL.Abstract;
+using OnlineShoppingCoreDAL.Concrete.Memory;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+//Dependency Injection
+builder.Services.AddScoped<IProductDAL, MemoryProductDAL>();
+builder.Services.AddScoped<IProductService, ProductManager>();
+
+//MVC mimarisi
+builder.Services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Latest);
 
 var app = builder.Build();
 
@@ -21,5 +34,10 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index");
+});
 
 app.Run();

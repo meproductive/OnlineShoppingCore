@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShoppingCoreBLL.Concrete
 {
-    internal class ProductManager : IProductService
+    public class ProductManager : IProductService
     {
         //Injection
         private IProductDAL _productdal;       
