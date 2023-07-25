@@ -14,5 +14,11 @@ namespace OnlineShoppingCoreEntity
         public double Price { get; set; }
 
         public List<ProductCategory> ProductCategory { get; set; }
+
+        public Product()
+        {
+            Images = new List<Image>();
+        }
     }
+
 }
