@@ -27,6 +27,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+SeedDatabase.Seed();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
