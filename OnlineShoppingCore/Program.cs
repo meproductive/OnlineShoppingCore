@@ -2,6 +2,7 @@
 using OnlineShoppingCoreBLL.Abstract;
 using OnlineShoppingCoreBLL.Concrete;
 using OnlineShoppingCoreDAL.Abstract;
+using OnlineShoppingCoreDAL.Concrete.EFCore;
 using OnlineShoppingCoreDAL.Concrete.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 //Dependency Injection
-builder.Services.AddScoped<IProductDAL, MemoryProductDAL>();
+builder.Services.AddScoped<IProductDAL, EFCoreProductDAL>();
 builder.Services.AddScoped<IProductService, ProductManager>();
 
 //MVC mimarisi
@@ -41,3 +42,4 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+
