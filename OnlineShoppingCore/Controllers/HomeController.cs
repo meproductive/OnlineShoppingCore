@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShoppingCore.Models;
 using OnlineShoppingCoreBLL.Abstract;
 
 namespace OnlineShoppingCore.Controllers
@@ -13,7 +14,10 @@ namespace OnlineShoppingCore.Controllers
         }
         public IActionResult Index()
         {
-            return View(_productService.GetAll());
+            return View(new ProductListViewModel()
+            {
+               Products = _productService.GetAll()
+            });
         }
     }
 }

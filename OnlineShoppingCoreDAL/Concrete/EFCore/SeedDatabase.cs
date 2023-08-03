@@ -26,8 +26,9 @@ namespace OnlineShoppingCoreDAL.Concrete.EFCore
                 }
                 if(context.Products.Count() == 0)
                 {
-
+                    context.Products.AddRange(Products);
                 }
+                context.SaveChanges();
             }
         }
         private static Category[] Categories =
@@ -37,7 +38,7 @@ namespace OnlineShoppingCoreDAL.Concrete.EFCore
         };
         private static Product[] Products =
         {
-            new Product(){Name= "T-shirt", Price=150, Images={new Image(){ImageUrl="tshirtb.jpg"}
-        };
+            new Product(){Name= "T-shirt", Price=150, Images={ new Image() { ImageUrl = "tshirtb.jpg", }, new Image() { ImageUrl = "tshirtb.jpg" } }, Description="güzel" }
+        };          
     }
 }

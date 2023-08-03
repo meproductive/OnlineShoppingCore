@@ -1,4 +1,5 @@
 
+using OnlineShoppingCore.Middlewares;
 using OnlineShoppingCoreBLL.Abstract;
 using OnlineShoppingCoreBLL.Concrete;
 using OnlineShoppingCoreDAL.Abstract;
@@ -31,6 +32,7 @@ SeedDatabase.Seed();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+//app.CustomStaticFiles();
 
 app.UseRouting();
 

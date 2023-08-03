@@ -1,20 +1,6 @@
-﻿@using OnlineShoppingCoreEntity;
-@model IEnumerable<Product>
-@{
-    Layout = null;
+﻿@model ProductListViewModel
+
+@foreach (var item in Model.Products)
+{
+    <h1>@item.Name</h1>
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    @foreach (Product item in Model)
-    {
-        <h1>@item.Name</h1>
-    }
-</body>
-</html>
