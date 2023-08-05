@@ -1,13 +1,16 @@
 ﻿@model ProductListViewModel
+@{
+    ViewData["Title"] = "List";
+}
 
 <section>
-        <partial name="_Slider"/>
     <div class="card-outer-container">
         <div class="card-inner-container d-flex">
             @foreach (var item in Model.Products)
             {
                 <partial name="_Product" for="@item" />
-            }                 
+            }
         </div>
     </div>
 </section>
+

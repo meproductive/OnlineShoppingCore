@@ -9,6 +9,7 @@ namespace OnlineShoppingCoreDAL.Abstract
 {
     public interface IProductDAL : IRepository<Product>
     {
-        IEnumerable<Product> GetPopularProducts();
+        //IEnumerable<Product> GetPopularProducts();
+        Product GetProductDetails(int id);
     }
 }

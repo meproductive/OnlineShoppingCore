@@ -1,0 +1,76 @@
+﻿@model ProductDetailsViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<section>
+    <div class="wrapper">
+        <div class="out-wrap">
+            <div class="product-title-container">
+                <h4 class="product-title">New Season!!! On Sale!!!</h4>
+            </div>
+            <div class="in-wrap d-flex">
+                <div class="img-content">
+                    <img id="expandedImg" class="img-size" src="~/Image/@Model.Product.Images[0].ImageUrl" style="width:100%">
+                    <div id="imgtext"></div>
+                </div>
+                <div class="img-info">
+                    <h2 class="playfair padding">@Model.Product.Name</h2>
+                    <h4 class="playfair padding">@Model.Product.Price</h4>
+                    <h4 id="font-size" class="playfair">@Model.Product.Color</h4>
+                    <div class="rating padding">
+                        <div class="row">
+                            <div class="column">
+                                <img src="~/Image/@Model.Product.Images[0].ImageUrl" alt="#" style="width:100%" onclick="myFunction(this);">
+                            </div>
+                            <div class="column">
+                                <img src="~/Image/@Model.Product.Images[0].ImageUrl" alt="#" style="width:100%" onclick="myFunction(this);">
+                            </div>
+                            <div class="column">
+                                <img src="~/Image/@Model.Product.Images[0].ImageUrl" alt="#" style="width:100%" onclick="myFunction(this);">
+                            </div>
+                        </div>
+                        <a href="#" id="a-item-selector">Comments(5)</a><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <div class="custom-select">
+                        <select id="size">
+                            <option value="C">Choose Your Size</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                        </select>
+                    </div>
+                    <p><button>Add to Cart</button></p>
+                </div>
+            </div>
+            <div class="info-wrapper">
+                <hr>
+                <div class="info-content">
+                    <ul class="d-flex">
+                        <li class="tabli"><button class="tablink" onclick="openPage('ProductDetail',this, 'white')">Product Details</button></li>
+                        <li class="tabli"><button class="tablink" onclick="openPage('Comments',this)" id="defaultOpen">Comments</button></li>
+                        <li class="tabli"><button class="tablink" onclick="openPage('Description',this)">Description</button></li>
+                    </ul>
+                    <div id="ProductDetail" class="tabcontent">
+                        <p>
+                            Some information about the product
+                        </p>
+                    </div>
+                    <div id="Comments" class="tabcontent">
+                        <p>
+                            Some information about the product
+                        </p>
+                    </div>
+                    <div id="Description" class="tabcontent">
+                        <p>
+                            Some information about the product
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

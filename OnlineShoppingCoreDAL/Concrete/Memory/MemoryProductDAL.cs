@@ -25,7 +25,7 @@ namespace OnlineShoppingCoreDAL.Concrete.Memory
         {
             var products = new List<Product>()
             {
-               new Product() {Id=1, Name="Samsung", Price=10000, Images={new Image() { ImageUrl="1.jpg"} }}
+               new Product() {Id=1, Name="Samsung", Price=10000, Images={new Image() { ImageUrl="tshirtb.jpg"} }}
             };
             return products;
         }

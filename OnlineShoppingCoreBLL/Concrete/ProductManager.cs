@@ -33,9 +33,14 @@ namespace OnlineShoppingCoreBLL.Concrete
             return _productdal.GetAll().ToList();
         }
 
-        public Product getById(int id)
+        public Product GetById(int id)
         {
             return _productdal.GetById(id);
+        }
+
+        public Product GetProductDetails(int id)
+        {
+            return _productdal.GetProductDetails(id);
         }
 
         public void Update(Product entity)

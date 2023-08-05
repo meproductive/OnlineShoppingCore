@@ -31,7 +31,7 @@ namespace OnlineShoppingCoreDAL.Concrete.EFCore
             }
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter)
+        public virtual IEnumerable<T> GetAll(Expression<Func<T, bool>> filter)
         {
             using (var context = new TContext())
             {
@@ -39,7 +39,7 @@ namespace OnlineShoppingCoreDAL.Concrete.EFCore
             }             
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             using (var context = new TContext())
             {

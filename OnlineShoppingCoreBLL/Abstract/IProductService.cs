@@ -9,10 +9,11 @@ namespace OnlineShoppingCoreBLL.Abstract
 {
     public interface IProductService
     {
-        Product getById(int id);
+        Product GetById(int id);
         List<Product> GetAll();
         void Create(Product entity);
         void Update(Product entity);
         void Delete(Product entity);
+        Product GetProductDetails(int id);
     }
 }
