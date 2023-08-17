@@ -15,11 +15,20 @@ namespace OnlineShoppingCore.Controllers
         {
             return View();
         }
-        public IActionResult List()
+        [Route("products/{category?}")]
+        public IActionResult List(string category, int page=1)
         {
+            const int pageSize = 3;
             return View(new ProductListViewModel()
             {
-                Products = _productService.GetAll()
+                Pageınfo = new PageInfo()
+                {
+                    TotalItems = _productService.GetCountByCategory(category),
+                    CurrentPage = page,
+                    ItemsPerPage = pageSize,
+                    CurrentCategory = category
+                },
+                Products = _productService.GetProductByCategory(category, page, pageSize)
             });
         }
         public IActionResult Details(int? id)
@@ -28,7 +37,7 @@ namespace OnlineShoppingCore.Controllers
             {
                 return NotFound();
             }
-            var product = _productService.GetById((int)id);
+            var product = _productService.GetProductDetails((int)id);
             //var product = _productService.GetById(id.Value);
 
             if (product == null)

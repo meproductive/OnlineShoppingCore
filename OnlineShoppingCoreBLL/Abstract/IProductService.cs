@@ -15,5 +15,7 @@ namespace OnlineShoppingCoreBLL.Abstract
         void Update(Product entity);
         void Delete(Product entity);
         Product GetProductDetails(int id);
+        List<Product> GetProductByCategory(string category, int page, int pageSize);
+        int GetCountByCategory(string category);
     }
 }

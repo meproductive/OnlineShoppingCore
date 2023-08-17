@@ -17,18 +17,22 @@
                 <div class="img-info">
                     <h2 class="playfair padding">@Model.Product.Name</h2>
                     <h4 class="playfair padding">@Model.Product.Price</h4>
-                    <h4 id="font-size" class="playfair">@Model.Product.Color</h4>
+                    <h4 id="font-size" class="playfair"></h4>
                     <div class="rating padding">
                         <div class="row">
+                            @for (var i = 0; i < Model.Product.Images.Count; i++)
+                            {
+                                <div class="column">
+                                    <img src="~/Image/@Model.Product.Images[0].ImageUrl" alt="#" style="width:100%" onclick="myFunction(this);">
+                                </div>
+                            }
+@*
                             <div class="column">
                                 <img src="~/Image/@Model.Product.Images[0].ImageUrl" alt="#" style="width:100%" onclick="myFunction(this);">
                             </div>
                             <div class="column">
                                 <img src="~/Image/@Model.Product.Images[0].ImageUrl" alt="#" style="width:100%" onclick="myFunction(this);">
-                            </div>
-                            <div class="column">
-                                <img src="~/Image/@Model.Product.Images[0].ImageUrl" alt="#" style="width:100%" onclick="myFunction(this);">
-                            </div>
+                            </div>*@
                         </div>
                         <a href="#" id="a-item-selector">Comments(5)</a><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                     </div>

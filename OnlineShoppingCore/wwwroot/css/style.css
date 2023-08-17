@@ -14,6 +14,10 @@
     --btn-hover-color: #E57373;
 }
 
+.pagination {
+    display: flex;
+}
+
 /*BANNER START*/
 
 .banner {
@@ -919,11 +923,9 @@
 .wrapper .panel-content .panel-container .paneltab {
     height: 100%;
     width: 100%;
-    display: none;
 }
 
 .wrapper .panel-content .panel-container .paneltab .box-model {
-    display: flex;
     height: 100%;
     width: 100%;
     align-items: center;

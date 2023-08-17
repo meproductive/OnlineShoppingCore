@@ -137,40 +137,6 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 
-function imaFunction() {
-  document.getElementById("iamDropdown").classList.toggle("show");
-}
-
-windows.onclick = function(event) {
-  if (!event.target.matches('.drop-btn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-
-
-function imFunction() {
-  document.getElementById("imDropdown").classList.toggle("show");
-}
-
-windows.onclick = function(event) {
-  if (!event.target.matches('.drop-txt')) {
-    var drpdwns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < drpdwns.length; i++) {
-      var openDpn = drpdwns[i];
-      if (openDpn.classList.contains('show')) {
-        openDpn.classList.remove('show');
-      }
-    }
-  }
-}
 
 function myFunction(imgs) {
   var expandImg = document.getElementById("expandedImg");
@@ -198,24 +164,37 @@ function openPage(pageName,elmnt,color) {
 document.getElementById("defaultOpen").click();
 
 
-function Tab(pageName,elmnt,color) {
-  // Hide all elements with class="tabcontent" by default */
-  var i, paneltab, panellink;
-  paneltab = document.getElementsByClassName("paneltab");
-  for (i = 0; i < paneltab.length; i++) {
-    paneltab[i].style.display = "none";
-  }
-
-  // Remove the background color of all tablinks/buttons
-  panellink = document.getElementsByClassName("panel-link");
-  for (i = 0; i < panellink.length; i++) {
-    panellink[i].style.backgroundColor = "";
-  }
-
-  // Show the specific tab content
-  document.getElementById(pageName).style.display = "block";
-  elmnt.style.backgroundColor = color;
+function imaFunction() {
+    document.getElementById("iamDropdown").classList.toggle("show");
 }
 
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("default").click();
+windows.onclick = function (event) {
+    if (!event.target.matches('.drop-btn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
+
+function imFunction() {
+    document.getElementById("imDropdown").classList.toggle("show");
+}
+
+windows.onclick = function (event) {
+    if (!event.target.matches('.drop-txt')) {
+        var drpdwns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < drpdwns.length; i++) {
+            var openDpn = drpdwns[i];
+            if (openDpn.classList.contains('show')) {
+                openDpn.classList.remove('show');
+            }
+        }
+    }
+}

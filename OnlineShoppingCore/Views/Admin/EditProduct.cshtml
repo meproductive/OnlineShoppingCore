@@ -1,0 +1,48 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "EditProduct";
+}
+
+<h1>EditProduct</h1>
+
+<div class="wrapper">
+    <div class="panel-content d-flex">
+        <div class="panel-container">
+            <div class="panel-tab">
+                <div class="box-model">
+                    <div class="register-model">
+                        <h2>Add Product</h2>
+                        <form asp-controller="Admin" asp-action="EditProduct" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="Id" value="@Model.Id"/>
+                            <div class="input-box">
+                                <label>Product Name</label>
+                                <input type="text" asp-for="Name" value="@Model.Name" required placeholder="Write product name here">
+                                <span asp-validation-for="Name"></span>
+                            </div>
+
+                            <div class="input-box">
+                                <label>Price</label>
+                                <input type="text" asp-for="Price" value="@Model.Price" required placeholder="Write price here">
+                                <span asp-validation-for="Price"></span>
+                            </div>
+                            <div class="input-box">
+                                <label>Description</label>
+                                <textarea rows="5" cols="" asp-for="Description" value="@Model.Description" required placeholder="Write description here"></textarea>
+                                <span asp-validation-for="Description"></span>
+                            </div>
+                            @foreach(var item in Model.Images)
+                            {
+                                <div class="input-box">
+                                    <label asp-for="@item.ImageUrl">Image</label>
+                                    <img src="~/Image/@item.ImageUrl" width="80"/>
+                                    <input type="file" name="files">
+                                </div>
+                            }                          
+                            <button type="submit" class="btn">Apply</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

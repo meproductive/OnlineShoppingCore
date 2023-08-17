@@ -25,15 +25,32 @@ namespace OnlineShoppingCoreDAL.Concrete.EFCore
                 return filter == null ? products.ToList() : products.Where(filter).ToList();
             }
         }
-        public override Product GetById(int id)
+
+        public List<Product> GetProductByCategory(string category, int page, int pageSize)
         {
             using (var context = new ShopContext())
             {
-                //var product = context.Products.Include("Images").Where(i => i.Id == id).FirstOrDefault();
-                return context.Products.Include("Images").FirstOrDefault(i => i.Id == id);
-            }
+                var products = context.Products.Include("Images").AsQueryable();
+                if (!string.IsNullOrEmpty(category))
+                {
+                    products = products.Include(i => i.ProductCategory)
+                        .ThenInclude(i => i.Category)
+                        .Where(i => i.ProductCategory.Any(a => a.Category.Name.ToLower() == category.ToLower()));
 
+                }
+                return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            }
         }
+
+        //public override Product GetById(int id)
+        //{
+        //    using (var context = new ShopContext())
+        //    {
+        //        //var product = context.Products.Include("Images").Where(i => i.Id == id).FirstOrDefault();
+        //        return context.Products.Include("Images").FirstOrDefault(i => i.Id == id);
+        //    }
+
+        //}
 
         public Product GetProductDetails(int id)
         {
@@ -46,5 +63,25 @@ namespace OnlineShoppingCoreDAL.Concrete.EFCore
                     .FirstOrDefault();
             }
         }
+
+        public override void Update(Product entity)
+        {
+            using (var context = new ShopContext())
+            {
+                context.Images.RemoveRange(context.Images.Where(i => i.ProductId == entity.Id).ToList());
+
+                var product = context.Products.Where(i => i.Id == entity.Id).FirstOrDefault();
+
+                product.Description = entity.Description;
+                product.Name = entity.Name;
+                product.Price = entity.Price;
+                product.Images = entity.Images;
+
+                context.SaveChanges();
+            }
+            base.Update(entity);
+        }
+              
     }
 }
+

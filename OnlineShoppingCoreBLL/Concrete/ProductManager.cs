@@ -1,4 +1,5 @@
-﻿using OnlineShoppingCoreBLL.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShoppingCoreBLL.Abstract;
 using OnlineShoppingCoreDAL.Abstract;
 using OnlineShoppingCoreDAL.Concrete.EFCore;
 using OnlineShoppingCoreEntity;
@@ -36,6 +37,29 @@ namespace OnlineShoppingCoreBLL.Concrete
         public Product GetById(int id)
         {
             return _productdal.GetById(id);
+        }
+
+        public int GetCountByCategory(string category)
+        {
+            using (var context = new ShopContext())
+            {
+
+                var products = context.Products.AsQueryable();
+                if (!string.IsNullOrEmpty(category))
+                {
+                    products = products.Include(i => i.ProductCategory)
+                        .ThenInclude(i => i.Category)
+                        .Where(i => i.ProductCategory.Any(a => a.Category.Name.ToLower() == category.ToLower()));
+
+                }
+                return products.Count();
+            }
+
+        }
+
+        public List<Product> GetProductByCategory(string category, int page, int pageSize)
+        {
+            return _productdal.GetProductByCategory(category, page, pageSize);
         }
 
         public Product GetProductDetails(int id)

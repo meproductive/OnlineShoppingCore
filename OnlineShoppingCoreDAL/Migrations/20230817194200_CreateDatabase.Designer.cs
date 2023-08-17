@@ -11,8 +11,8 @@ using OnlineShoppingCoreDAL.Concrete.EFCore;
 namespace OnlineShoppingCoreDAL.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20230802164237_UpdateProduct")]
-    partial class UpdateProduct
+    [Migration("20230817194200_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,7 +59,7 @@ namespace OnlineShoppingCoreDAL.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("OnlineShoppingCoreEntity.Product", b =>

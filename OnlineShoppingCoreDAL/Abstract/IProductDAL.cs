@@ -11,5 +11,6 @@ namespace OnlineShoppingCoreDAL.Abstract
     {
         //IEnumerable<Product> GetPopularProducts();
         Product GetProductDetails(int id);
+        List<Product> GetProductByCategory(string category, int page, int pageSize);
     }
 }

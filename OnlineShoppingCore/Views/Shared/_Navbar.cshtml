@@ -16,18 +16,19 @@
                         <span class="resp-x-icon"><i class="fa-solid fa-xmark"></i></span>
                     </div>
                 </div>
-                <li><a class="playfair active-bottom" href="#">HOME</i></a></li>
+                <li><a class="playfair active-bottom" href="/">HOME</i></a></li>
                 <li><a class="playfair" asp-controller="Shop" asp-action="List">SHOP<i class="arrow down"></i></a></li>
                 <li><a class="playfair" href="#">BLOG</a></li>
                 <li class="dropdown">
                     <a class="playfair" href="#" onclick="imaFunction()" class="drop-btn">CATEGORİES<i class="arrow down"></i></a>
                     <div class="dropdown-content" id="iamDropdown">
                         <ul>
-                            <li id="dp-li-item"><a href="#">Women</a></li>
+                            @await Component.InvokeAsync("CategoryList")
+                            @*<li id="dp-li-item"><a href="#">Women</a></li>
                             <li id="dp-li-item"><a href="#">Men</a></li>
                             <li id="dp-li-item"><a href="#">Teen</a></li>
                             <li id="dp-li-item"><a href="#">Kid</a></li>
-                            <li id="dp-li-item"><a href="#">Accessory</a></li>
+                            <li id="dp-li-item"><a href="#">Accessory</a></li>*@
                         </ul>
                     </div>
                 </li>
@@ -35,12 +36,17 @@
         </div>
         <div class="icon-menu">
             <ul class="d-flex">
-                <li><a href="login.html"><i class="fa-regular fa-user"></i></a></li>
                 <li class="dropdown">
-                    <i class="fa-solid fa-magnifying-glass dp-btn"></i>
-                    <div class="search-dp-content">
-                        <input class="search-input" type="text" placeholder="New collection men fashion or etc.">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                    <a href="#" onclick="imFunction()" class="drop-txt"><i class="fa-regular fa-user"></i></a>
+                    <div class="dropdown-content" id="imDropdown">
+                        <ul>                          
+                                <li id="dp-li-item"><a asp-controller="Admin" asp-action="CreateProduct">Add Product</a></li>
+                                <li id="dp-li-item"><a href="/Account/Logout">Logout</a></li>
+                                <li id="dp-li-item"><a asp-controller="Admin" asp-action="CreateCategory">Add Category</a></li>
+                                <li id="dp-li-item"><a href="/Admin/products">Admin ProductList</a></li>
+                            <li id="dp-li-item"><a href="/Admin/CategoryList">Admin ProductList</a></li>
+                                <li id="dp-li-item"><a href="/Account/Logout">Logout</a></li>
+                        </ul>
                     </div>
                 </li>
                 <li><a href="register.html"><i class="fa-regular fa-heart"></i></a></li>

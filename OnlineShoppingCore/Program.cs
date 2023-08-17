@@ -14,6 +14,8 @@ builder.Services.AddRazorPages();
 //Dependency Injection
 builder.Services.AddScoped<IProductDAL, EFCoreProductDAL>();
 builder.Services.AddScoped<IProductService, ProductManager>();
+builder.Services.AddScoped<ICategoryDAL, EFCoreCategoryDAL>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
 //MVC
 builder.Services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Latest);
@@ -43,6 +45,32 @@ app.MapRazorPages();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+    endpoints.MapControllerRoute(
+        name: "products",
+        pattern: "products/{category?}",
+        defaults: new { controller = "Shop", action = "List" }
+        );
+    endpoints.MapControllerRoute(
+        name: "adminProducts",
+        pattern: "admin/products",
+        defaults: new { controller = "Admin", action = "ProductList" }
+        );
+    endpoints.MapControllerRoute(
+        name: "adminProducts",
+        pattern: "admin/products/{id?}",
+        defaults: new { controller = "Admin", action = "EditProduct" }
+        );
+    endpoints.MapControllerRoute(
+        name: "adminCategories",
+        pattern: "admin/categories",
+        defaults: new { controller = "Admin", action = "CategoryList" }
+        );
+    endpoints.MapControllerRoute(
+        name: "adminCategories",
+        pattern: "admin/categories/{id?}",
+        defaults: new { controller = "Admin", action = "EditCategory" }
+        );
+
 });
 
 app.Run();
