@@ -3,6 +3,15 @@
 @{
     ViewData["Title"] = "CreateProduct";
 }
+<script>
+    $(document).ready(function(){
+        $("#fileImage").change(function(e)){
+            $("#previewImage").show()
+            $("#previewImage").attr('src',URL.createObjectURL(e.target.files[0]));
+        })
+    })
+</script>
+
 <div class="wrapper">
     <div class="panel-content d-flex">
         <div class="panel-container">
@@ -29,7 +38,8 @@
                             </div>
                             <div class="input-box">
                                 <label asp-for="Images">Image</label>
-                                <input type="file" name="files" multiple>
+                                <img src="" width="80" id="previewImage"/>
+                                <input type="file" name="files" multiple id="fileImage">
                             </div>
                             <button type="submit" class="btn">Apply</button>
                         </form>

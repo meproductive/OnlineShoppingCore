@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShoppingCore.Models;
 using OnlineShoppingCoreBLL.Abstract;
 using OnlineShoppingCoreDAL.Abstract;
@@ -6,6 +7,7 @@ using OnlineShoppingCoreEntity;
 
 namespace OnlineShoppingCore.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IProductService _productService;
@@ -30,6 +32,12 @@ namespace OnlineShoppingCore.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct(ProductViewModel model, List<IFormFile> files)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             var entity = new Product()
             {
                 Name = model.Name,
@@ -56,21 +64,37 @@ namespace OnlineShoppingCore.Controllers
 
             return RedirectToAction("ProductList");
         }
-        public IActionResult EditProduct(int id)
+        public IActionResult EditProduct(int? id)
         {
-            var model = _productService.GetProductDetails(id);
+            if (id == null)
+                return NotFound();
+
+            var model = _productService.GetByWithCategories(id.Value);
+
+            ViewBag.Categories = _categoryService.GetAll();
+
             return View(new ProductViewModel()
             {
                 Id = model.Id,
                 Name = model.Name,
                 Images = model.Images,
                 Description = model.Description,
-                Price = model.Price
+                Price = model.Price,
+                Categories = model.ProductCategory.Select(i => i.Category).ToList()
             });
         }
         [HttpPost]
-        public async Task<IActionResult> EditProduct(ProductViewModel model, List<IFormFile> files)
+        public async Task<IActionResult> EditProduct(ProductViewModel model, List<IFormFile> files, int[] categoryIds)
         {
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = _categoryService.GetAll();
+                var m = _productService.GetByWithCategories(model.Id);
+                model.Images = m.Images;
+                model.Categories = m.ProductCategory.Select(i => i.Category).ToList();
+                return View(model);
+            }
             var entity = _productService.GetById(model.Id);
 
             if (entity == null)
@@ -99,7 +123,7 @@ namespace OnlineShoppingCore.Controllers
                     }
                 }
 
-                _productService.Update(entity);
+                _productService.Update(entity, categoryIds);
                 return RedirectToAction("ProductList");
             }
             return View(model);
@@ -137,11 +161,13 @@ namespace OnlineShoppingCore.Controllers
         }
         public IActionResult EditCategory(int id)
         {
-            var category = _categoryService.GetById(id);
+            var category = _categoryService.GetByIdWithProducts(id);
             return View(new CategoryViewModel()
             {
                 Id = category.Id,
-                Name = category.Name
+                Name = category.Name,
+                Products = category.ProductCategory.Select(i => i.Product).ToList()
+
             });
         }
         [HttpPost]
@@ -154,5 +180,22 @@ namespace OnlineShoppingCore.Controllers
             entity.Name = model.Name;
             return RedirectToAction("CategoryList");
         }
+        [HttpPost]
+        public IActionResult DeleteCategory(int categoryId)
+        {
+            var entity = _categoryService.GetById(categoryId);
+            if (entity == null)
+                return NotFound();
+
+            _categoryService.Delete(entity);
+            return RedirectToAction("CategoryList");
+        }
+        [HttpPost]
+        public IActionResult DeleteFromCategory(int categoryId, int productId)
+        {
+            _categoryService.DeleteFromCategory(categoryId, productId);
+            return Redirect("/admin/categories/" + categoryId);
+        }
     }
 }
+

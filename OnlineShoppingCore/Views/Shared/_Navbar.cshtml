@@ -36,20 +36,36 @@
         </div>
         <div class="icon-menu">
             <ul class="d-flex">
-                <li class="dropdown">
-                    <a href="#" onclick="imFunction()" class="drop-txt"><i class="fa-regular fa-user"></i></a>
-                    <div class="dropdown-content" id="imDropdown">
-                        <ul>                          
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="dropdown">
+                        <a href="#" onclick="imFunction()" class="drop-txt"><i class="fa-regular fa-user"></i></a>
+                        <div class="dropdown-content" id="imDropdown">
+                            <ul>
                                 <li id="dp-li-item"><a asp-controller="Admin" asp-action="CreateProduct">Add Product</a></li>
                                 <li id="dp-li-item"><a href="/Account/Logout">Logout</a></li>
                                 <li id="dp-li-item"><a asp-controller="Admin" asp-action="CreateCategory">Add Category</a></li>
                                 <li id="dp-li-item"><a href="/Admin/products">Admin ProductList</a></li>
-                            <li id="dp-li-item"><a href="/Admin/CategoryList">Admin ProductList</a></li>
+                                <li id="dp-li-item"><a href="/Admin/CategoryList">Admin CategoryList</a></li>
+                                <li id="dp-li-item"><a href="/Account/Login">Login</a></li>
+                                <li id="dp-li-item"><a href="/Account/Register">Register</a></li>
                                 <li id="dp-li-item"><a href="/Account/Logout">Logout</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="register.html"><i class="fa-regular fa-heart"></i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li><a href="/Account/Login"><i class="fa-regular fa-user"></i></a></li>
+                    <li class="dropdown">
+                        <i class="fa-solid fa-magnifying-glass dp-btn"></i>
+                        <div class="search-dp-content">
+                            <input class="search-input" type="text" placeholder="New collection men fashion or etc.">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </li>
+                    <li><a href="/Account/Login"><i class="fa-regular fa-heart"></i></a></li>
+                }
                 <li class="dropdown">
                     <a href="#"><i class="fa-solid fa-bag-shopping bag-dp-btn"></i></a>
                     <div class="cart-content">

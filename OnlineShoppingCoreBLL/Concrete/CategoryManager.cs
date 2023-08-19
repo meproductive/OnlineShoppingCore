@@ -26,6 +26,11 @@ namespace OnlineShoppingCoreBLL.Concrete
             _categoryDal.Delete(entity);
         }
 
+        public void DeleteFromCategory(int categoryId, int productId)
+        {
+            _categoryDal.DeleteFromCategory(categoryId, productId);
+        }
+
         public List<Category> GetAll()
         {
             return _categoryDal.GetAll().ToList();
@@ -34,6 +39,11 @@ namespace OnlineShoppingCoreBLL.Concrete
         public Category GetById(int id)
         {
             return _categoryDal.GetById(id);
+        }
+
+        public Category GetByIdWithProducts(int id)
+        {
+            return _categoryDal.GetByIdWithProducts(id);
         }
 
         public void Update(Category entity)

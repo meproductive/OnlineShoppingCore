@@ -35,6 +35,11 @@ namespace OnlineShoppingCoreDAL.Concrete.Memory
             throw new NotImplementedException();
         }
 
+        public Product GetByWithCategories(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Product GetOne(Expression<Func<Product, bool>> filter)
         {
             throw new NotImplementedException();
@@ -61,6 +66,11 @@ namespace OnlineShoppingCoreDAL.Concrete.Memory
         }
 
         public void Update(Product entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Product entity, int[] categoryIds)
         {
             throw new NotImplementedException();
         }

@@ -39,6 +39,11 @@ namespace OnlineShoppingCoreBLL.Concrete
             return _productdal.GetById(id);
         }
 
+        public Product GetByWithCategories(int id)
+        {
+            return _productdal.GetByWithCategories(id);
+        }
+
         public int GetCountByCategory(string category)
         {
             using (var context = new ShopContext())
@@ -70,6 +75,11 @@ namespace OnlineShoppingCoreBLL.Concrete
         public void Update(Product entity)
         {
             _productdal.Update(entity);
+        }
+
+        public void Update(Product entity, int[] categoryIds)
+        {
+            _productdal.Update(entity, categoryIds);
         }
     }
 }

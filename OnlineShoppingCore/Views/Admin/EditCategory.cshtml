@@ -25,3 +25,42 @@
         </div>
     </div>
 </div>
+@if (Model.Products.Count > 0)
+{
+    <table class="">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Image</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td><img src="~/Image/@item.Images[0].ImageUrl" width="80" /></td>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>
+                        <a href="/admin/products/@item.Id">Edit</a>
+                        <form action="/admin/DeleteFromCategory" method="post">
+                            <input type="hidden" name="productId" value="@item.Id" />
+                            <input type="hidden" name="categoryId" value="Model.Id"/>
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div>
+        <h4>No Products</h4>
+    </div>
+}

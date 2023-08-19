@@ -11,6 +11,7 @@ namespace OnlineShoppingCore.Models
         public string Description { get; set; }
         public List<Image> Images { get; set; }
         public double Price { get; set; }
+        public List<Category> Categories { get; set; }
 
         //public List<ProductCategory> ProductCategories { get; set; }
 

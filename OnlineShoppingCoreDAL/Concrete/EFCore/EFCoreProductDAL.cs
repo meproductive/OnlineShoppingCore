@@ -25,7 +25,18 @@ namespace OnlineShoppingCoreDAL.Concrete.EFCore
                 return filter == null ? products.ToList() : products.Where(filter).ToList();
             }
         }
-
+        public Product GetByWithCategories(int id)
+        {
+            using (var context = new ShopContext())
+            {
+                return context.Products
+                    .Where(i => i.Id == id)
+                    .Include(i => i.ProductCategory)
+                    .ThenInclude(i => i.Category)
+                    .Include(i => i.Images)
+                    .FirstOrDefault();
+            }
+        }
         public List<Product> GetProductByCategory(string category, int page, int pageSize)
         {
             using (var context = new ShopContext())
@@ -41,17 +52,6 @@ namespace OnlineShoppingCoreDAL.Concrete.EFCore
                 return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             }
         }
-
-        //public override Product GetById(int id)
-        //{
-        //    using (var context = new ShopContext())
-        //    {
-        //        //var product = context.Products.Include("Images").Where(i => i.Id == id).FirstOrDefault();
-        //        return context.Products.Include("Images").FirstOrDefault(i => i.Id == id);
-        //    }
-
-        //}
-
         public Product GetProductDetails(int id)
         {
             using (var context = new ShopContext())
@@ -81,7 +81,34 @@ namespace OnlineShoppingCoreDAL.Concrete.EFCore
             }
             base.Update(entity);
         }
-              
+
+        public void Update(Product entity, int[] categoryIds)
+        {
+            using (var context = new ShopContext())
+            {
+                var product = context.Products
+                    .Include(i => i.ProductCategory)
+                    .ThenInclude(i => i.Category)
+                    .FirstOrDefault();
+
+                if (product != null)
+                {
+                    context.Images.RemoveRange(context.Images.Where(i => i.ProductId == entity.Id).ToList());                
+
+                    product.Description = entity.Description;
+                    product.Name = entity.Name;
+                    product.Price = entity.Price;
+                    product.Images = entity.Images;
+                    product.ProductCategory = categoryIds.Select(catid => new ProductCategory()
+                    {
+                        ProductId = entity.Id,
+                        CategoryId = catid
+                    }).ToList();
+
+                    context.SaveChanges();
+                }
+            }
+        }
     }
 }
 

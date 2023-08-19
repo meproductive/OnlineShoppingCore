@@ -3,6 +3,16 @@
     ViewData["Title"] = "EditProduct";
 }
 
+<script>
+    $(document).ready(function () {
+        $("#fileImage").change(function (e) {
+            $("#imgPreview").show()
+            $("#imgPreview").attr('src', URL.createObjectURL(e.target.files[0]));
+
+        })
+    })
+</script>
+
 <h1>EditProduct</h1>
 
 <div class="wrapper">
@@ -11,9 +21,9 @@
             <div class="panel-tab">
                 <div class="box-model">
                     <div class="register-model">
-                        <h2>Add Product</h2>
                         <form asp-controller="Admin" asp-action="EditProduct" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="Id" value="@Model.Id"/>
+                            <input type="hidden" name="Categories" value="@Model.Categories" />
                             <div class="input-box">
                                 <label>Product Name</label>
                                 <input type="text" asp-for="Name" value="@Model.Name" required placeholder="Write product name here">
@@ -34,15 +44,26 @@
                             {
                                 <div class="input-box">
                                     <label asp-for="@item.ImageUrl">Image</label>
-                                    <img src="~/Image/@item.ImageUrl" width="80"/>
-                                    <input type="file" name="files">
+                                    <img src="~/Image/@item.ImageUrl" width="80" id="imgPreview" />
+                                    <input type="file" name="files" id="fileImage">
                                 </div>
-                            }                          
+                            }               
                             <button type="submit" class="btn">Apply</button>
+
+                            @foreach (var item in (List<Category>)ViewBag.Categories)
+                            {
+                                <label for ="category@(item.Id)">@item.Name</label>
+                                <input type="checkbox"
+                                    name="categoryIds"
+                                    value="@item.Id"
+                                    id="category@(item.Id)"
+                                    @(Model.Categories.Any(i => i.Id == item.Id)?"checked":"")/>
+                            }
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
 </div>

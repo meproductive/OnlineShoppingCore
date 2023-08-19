@@ -11,7 +11,7 @@ using OnlineShoppingCoreDAL.Concrete.EFCore;
 namespace OnlineShoppingCoreDAL.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20230817194200_CreateDatabase")]
+    [Migration("20230818162625_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

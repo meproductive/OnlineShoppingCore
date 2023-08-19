@@ -1,4 +1,7 @@
 
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using OnlineShoppingCore.Identity;
 using OnlineShoppingCore.Middlewares;
 using OnlineShoppingCoreBLL.Abstract;
 using OnlineShoppingCoreBLL.Concrete;
@@ -10,6 +13,48 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<ApplicationIdentityDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    //Password
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.AllowedForNewUsers = true;
+
+    //User
+    options.User.RequireUniqueEmail = true;
+
+    //SignIn
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+    options.SignIn.RequireConfirmedEmail = true;
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.SlidingExpiration = true;
+    options.Cookie = new CookieBuilder
+    {
+        HttpOnly = true,
+        Name = ".ShopApp.Security.Cookie",
+        SameSite = SameSiteMode.Strict
+    };
+});
 
 //Dependency Injection
 builder.Services.AddScoped<IProductDAL, EFCoreProductDAL>();
@@ -36,8 +81,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 //app.CustomStaticFiles();
 
+app.UseAuthentication();
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapRazorPages();
