@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShoppingCore.EmailService;
 using OnlineShoppingCore.Identity;
 using OnlineShoppingCore.Models;
+using static System.Net.WebRequestMethods;
 
 namespace OnlineShoppingCore.Controllers
 {
@@ -43,6 +45,11 @@ namespace OnlineShoppingCore.Controllers
                     userId = user.Id,
                     token = code
                 });
+                string siteUrl = "https://localhost:7202/";
+                string activeUrl = $"{siteUrl}{callbackUrl}";
+
+                string body = $"Merhaba {model.Username}; Hesabınızı onaylamak için <a href='{activeUrl}' target='_blank'</a> tıklayınız";
+                MailHelper.SendEmail(body, model.Email, "Hesap Aktifleştirme");
                 return RedirectToAction("Login");
             }
             ModelState.AddModelError("", "HATA");
@@ -114,6 +121,15 @@ namespace OnlineShoppingCore.Controllers
                 }
             }
             TempData["message"] = "Account is not approved";
+            return View();
+        }
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ForgotPassword(string Email)
+        {
             return View();
         }
     }
