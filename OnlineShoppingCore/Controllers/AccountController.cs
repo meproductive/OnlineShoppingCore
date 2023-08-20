@@ -128,9 +128,33 @@ namespace OnlineShoppingCore.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ForgotPassword(string Email)
+        public async Task<IActionResult> ForgotPassword(string Email)
         {
-            return View();
+            if (string.IsNullOrEmpty(Email))
+            {
+                return View();
+            }
+
+            var user = await _userManager.FindByEmailAsync(Email);
+
+            if(user == null)
+            {
+                return View();
+            }
+
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var callbackUrl = Url.Action("ResetPassword", "Account", new
+            {
+                userId = user.Id,
+                token = code
+            });
+
+            string siteUrl = "https://localhost:7202/";
+            string activeUrl = $"{siteUrl}{callbackUrl}";
+
+            string body = $"Parolanızı yenilenemek için <a href='{activeUrl}' target='_blank'</a> tıklayınız";
+            MailHelper.SendEmail(body, Email, "Şifre Sıfırlama");
+            return RedirectToAction("Login");
         }
     }
 }
